@@ -8,11 +8,15 @@ class Paperboy
         @delivered = 0
     end
 
-    def update_quota
+    def quota
         @quota += (@experience / 2)
     end
 
     def deliver(start_address, end_address)
+        if start_address > end_address
+            puts "#{@name} got confused.  Maybe the end address should be greater than the start address..."
+        end
+
         deliveries =  end_address - start_address
 
         if deliveries > @quota
@@ -23,7 +27,7 @@ class Paperboy
             @earnings -= 2.00
 
         end
-        update_quota
+        quota
     end
 
     def report
@@ -34,5 +38,5 @@ end
 
 tommy = Paperboy.new("Tommy")
 puts tommy.report
-tommy.deliver(100, 151)
+tommy.deliver(100, 99)
 puts tommy.report
